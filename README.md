@@ -14,14 +14,17 @@ You must have the Python version 3.8 or higher. Please run the following command
 ##RUN TESTS
 
 To run tests in specific directory use command below.
-To run specific test add filename in the end of directory name. Example : pytest tests/tests_api_e2e/test_login_get_api_key_send_request.py
+To run specific test add filename in the end of directory name. 
 
-##NOTE
-
-Add the api_key/email/password for specified user in env_prod.py file
+Example : pytest tests/tests_api_e2e/test_login_get_api_key_send_request.py
 
     pytest tests/tests_ui
     pytest tests/tests_ui_e2e/
     pytest tests/tests_api
     pytest tests/tests_api_e2e/
+
+##NOTE
+
+Add the api_key/email/password for specified user in env_prod.py file
+
     
