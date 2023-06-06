@@ -27,10 +27,10 @@ class TestDashboard:
         page.wait_for_url(url=Prod.GETBLOCK_LANDING_PAGE, wait_until="load")
         assert page.url == Prod.GETBLOCK_LANDING_PAGE
         page.click(LandingPage.ACCOUNT_BUTTON)
-        page.wait_for_url(url=Prod.GETBLOCK_LOGIN_UI_PAGE,wait_until="load")
+        page.wait_for_url(url=Prod.GETBLOCK_LOGIN_UI_PAGE, wait_until="load")
         assert page.url == Prod.GETBLOCK_LOGIN_UI_PAGE
         page.click(LoginPage.EMAIL_LOGIN_BUTTON)
-        page.wait_for_url(url=Prod.GETBLOCK_SIGN_IN_EMAIL,wait_until="load")
+        page.wait_for_url(url=Prod.GETBLOCK_SIGN_IN_EMAIL, wait_until="load")
         assert page.url == Prod.GETBLOCK_SIGN_IN_EMAIL
         page.type(LoginPage.EMAIL_INPUT_FIELD, text=Prod.MERCHANT_EMAIL, delay=100)
         page.type(LoginPage.PASSWORD_INPUT_FIELD, text=Prod.MERCHANT_PASSWORD, delay=100)
@@ -59,7 +59,7 @@ class TestDashboard:
             "params": []
         }
 
-        response = requests.post(Prod.BITCOIN_TESTNET_URL, headers=headers,json=payload)
+        response = requests.post(Prod.BITCOIN_TESTNET_URL, headers=headers, json=payload)
         with allure.step(f'{response=} equals {Prod.status_code_success=}'):
             assert response.status_code == Prod.status_code_success
         data = response.json()
