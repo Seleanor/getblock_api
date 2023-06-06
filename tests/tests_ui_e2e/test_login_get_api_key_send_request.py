@@ -2,7 +2,6 @@ import allure
 import pytest
 import requests
 from playwright.sync_api import sync_playwright
-from pytest_playwright.pytest_playwright import browser_type, page
 from env_settings.env_prod import Prod
 from page_object.dashboard.dashboard_page import DashboardPage
 from page_object.dashboard.landing_page import LandingPage
@@ -72,5 +71,3 @@ class TestDashboard:
         with allure.step(f'{response_time=} less {Prod.max_response_time=}'):
             assert response_time <= Prod.max_response_time
         page.close()
-
-
