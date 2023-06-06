@@ -19,13 +19,12 @@ class TestDashboard:
     @pytest.fixture(scope="module")
     def browser(self):
         with sync_playwright() as playwright:
-            # Запуск браузера с графическим интерфейсом headless=True / без графического интерфейса headless=False
-            # Запуск браузера не в инкогнито???
-            browser = playwright.chromium.launch(headless=True, args=["--incognito=False"])
+            # Запуск браузера с графическим интерфейсом headless=False / без графического интерфейса headless=True
+            browser = playwright.chromium.launch(headless=True)
             yield browser
             browser.close()
 
-    def test_login_e2e(self,browser):
+    def test_login_api_e2e(self, browser):
         page = browser.new_page()
         page.goto(GETBLOCK_LANDING_PAGE)
         page.wait_for_url(url=GETBLOCK_LANDING_PAGE, wait_until="load")
@@ -41,18 +40,18 @@ class TestDashboard:
         page.click(CONTINUE_BUTTON)
         page.wait_for_url(url=GETBLOCK_DASHBOARD_UI_PAGE, wait_until="load")
         assert page.url == GETBLOCK_DASHBOARD_UI_PAGE
-        # # Решение 1 доступ к clipboard
+        # # Решение 1 не рабочее в браузере инкогнито доступ к clipboard
         page.click(KEY_BUTTON)
         page.click(COPY_BUTTON)
-        api_key_clipboard_value = page.evaluate("navigator.clipboard.readText()")
-        api_key = api_key_clipboard_value
+        # api_key_clipboard_value = page.evaluate("navigator.clipboard.readText()")
+        # api_key = api_key_clipboard_value
         # # Решение 2 - рабочее- захардкодить апи ключ
-        # api_key = API_KEY
-        # # Решение 3 - не рабочее - скопировать innertext по локатору (Текст в элементе скрыт)
+        api_key = API_KEY
+        # # Решение 3 - не рабочее - скопировать innertext по локатору (Текст в элементе protected)
         # api_key = page.inner_text(API_KEY_VALUE)
-        # Решение 4 - не рабочее получить значение через JS $0.value 1 из 2
-        # api_key = page.evaluate("() => $0.value", page.query_selector(API_KEY_VALUE))
-        # api_key = page.evaluate("() => $0.value")
+        # Решение 4 - не рабочее получить значение через JS $0.value
+        # element = page.query_selector(API_KEY_VALUE)
+        # api_key = element.evaluate('(api_key) => $0.value')
         headers = {
             "x-api-key": f"{api_key}"
         }
