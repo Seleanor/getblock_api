@@ -42,7 +42,7 @@ class TestDashboard:
         page.click(DashboardPage.COPY_BUTTON)
         # api_key_clipboard_value = page.evaluate("navigator.clipboard.readText()")
         # api_key = api_key_clipboard_value
-        # # Решение 2 - рабочее- захардкодить апи ключ
+        # # Решение 2 - рабочее- задать апи ключ в переменных
         api_key = Prod.API_KEY
         # # Решение 3 - не рабочее - скопировать innertext по локатору (Текст в элементе protected)
         # api_key = page.inner_text(DashboardPage.API_KEY_VALUE)
