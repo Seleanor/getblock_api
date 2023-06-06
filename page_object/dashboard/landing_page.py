@@ -1,1 +1,2 @@
-ACCOUNT_BUTTON = "//a[@class='account-button']"
+class LandingPage:
+    ACCOUNT_BUTTON = "//a[@class='account-button']"
