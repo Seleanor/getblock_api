@@ -9,3 +9,4 @@ class Prod:
     max_response_time = 5
     status_code_success = 200
     API_KEY = "api_key"
+    API_KEY_JS = "document.querySelectorAll('input')[1].value"

@@ -38,16 +38,15 @@ class TestDashboard:
         assert page.url == Prod.GETBLOCK_DASHBOARD_UI_PAGE
         # # Решение 1 не рабочее в браузере инкогнито доступ к clipboard отключен (локально работает)
         page.click(DashboardPage.KEY_BUTTON)
-        page.click(DashboardPage.COPY_BUTTON)
+        # page.click(DashboardPage.COPY_BUTTON)
         # api_key_clipboard_value = page.evaluate("navigator.clipboard.readText()")
         # api_key = api_key_clipboard_value
         # # Решение 2 - рабочее- задать апи ключ в переменных
-        api_key = Prod.API_KEY
+        # api_key = Prod.API_KEY
         # # Решение 3 - не рабочее - скопировать innertext по локатору (Текст в элементе protected)
         # api_key = page.inner_text(DashboardPage.API_KEY_VALUE)
-        # Решение 4 - не рабочее получить значение через JS $0.value
-        # element = page.query_selector(DashboardPage.API_KEY_VALUE)
-        # api_key = element.evaluate('(api_key) => $0.value')
+        # Решение 4 - рабочее получить значение через JS page evaluate
+        api_key = page.evaluate(Prod.API_KEY_JS)
         headers = {
             "x-api-key": f"{api_key}"
         }
