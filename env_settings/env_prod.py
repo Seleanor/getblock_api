@@ -8,4 +8,4 @@ class Prod:
     GETBLOCK_SIGN_IN_EMAIL = "https://account.getblock.io/sign-in-email"
     max_response_time = 5
     status_code_success = 200
-    API_KEY = "43f276d3-294b-4215-aba3-ccd6b772a11c"
+    API_KEY = "api_key"
