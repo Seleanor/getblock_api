@@ -37,7 +37,7 @@ class TestDashboard:
         page.click(LoginPage.CONTINUE_BUTTON)
         page.wait_for_url(url=Prod.GETBLOCK_DASHBOARD_UI_PAGE, wait_until="load")
         assert page.url == Prod.GETBLOCK_DASHBOARD_UI_PAGE
-        # # Решение 1 не рабочее в браузере инкогнито доступ к clipboard
+        # # Решение 1 не рабочее в браузере инкогнито доступ к clipboard отключен (локально работает)
         page.click(DashboardPage.KEY_BUTTON)
         page.click(DashboardPage.COPY_BUTTON)
         # api_key_clipboard_value = page.evaluate("navigator.clipboard.readText()")
