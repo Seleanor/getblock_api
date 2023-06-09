@@ -24,29 +24,35 @@ class TestDashboard:
         page = browser.new_page()
         page.goto(Prod.GETBLOCK_LANDING_PAGE)
         page.wait_for_url(url=Prod.GETBLOCK_LANDING_PAGE, wait_until="load")
-        assert page.url == Prod.GETBLOCK_LANDING_PAGE
+        with allure.step(f'{page.url=} equals {Prod.GETBLOCK_LANDING_PAGE=}'):
+            assert page.url == Prod.GETBLOCK_LANDING_PAGE
         page.click(LandingPage.ACCOUNT_BUTTON)
         page.wait_for_url(url=Prod.GETBLOCK_LOGIN_UI_PAGE, wait_until="load")
-        assert page.url == Prod.GETBLOCK_LOGIN_UI_PAGE
+        with allure.step(f'{page.url=} equals {Prod.GETBLOCK_LOGIN_UI_PAGE=}'):
+            assert page.url == Prod.GETBLOCK_LOGIN_UI_PAGE
         page.click(LoginPage.EMAIL_LOGIN_BUTTON)
         page.wait_for_url(url=Prod.GETBLOCK_SIGN_IN_EMAIL, wait_until="load")
-        assert page.url == Prod.GETBLOCK_SIGN_IN_EMAIL
+        with allure.step(f'{page.url=} equals {Prod.GETBLOCK_SIGN_IN_EMAIL=}'):
+            assert page.url == Prod.GETBLOCK_SIGN_IN_EMAIL
         page.type(LoginPage.EMAIL_INPUT_FIELD, text=Prod.MERCHANT_EMAIL, delay=100)
         page.type(LoginPage.PASSWORD_INPUT_FIELD, text=Prod.MERCHANT_PASSWORD, delay=100)
         page.click(LoginPage.CONTINUE_BUTTON)
         page.wait_for_url(url=Prod.GETBLOCK_DASHBOARD_UI_PAGE, wait_until="load")
-        assert page.url == Prod.GETBLOCK_DASHBOARD_UI_PAGE
+        with allure.step(f'{page.url=} equals {Prod.GETBLOCK_DASHBOARD_UI_PAGE=}'):
+            assert page.url == Prod.GETBLOCK_DASHBOARD_UI_PAGE
         # # Решение 1 не рабочее в браузере инкогнито доступ к clipboard отключен (локально работает)
         page.click(DashboardPage.KEY_BUTTON)
         # page.click(DashboardPage.COPY_BUTTON)
         # api_key_clipboard_value = page.evaluate("navigator.clipboard.readText()")
         # api_key = api_key_clipboard_value
-        # # Решение 2 - рабочее- задать апи ключ в переменных
+        # # Решение 2 - рабочее - задать апи ключ в переменных
         # api_key = Prod.API_KEY
         # # Решение 3 - не рабочее - скопировать innertext по локатору (Текст в элементе protected)
         # api_key = page.inner_text(DashboardPage.API_KEY_VALUE)
-        # Решение 4 - рабочее получить значение через JS page evaluate
+        # Решение 4 - рабочее - получить значение через JS page page.evaluate()
         api_key = page.evaluate(Prod.API_KEY_JS)
+        with allure.step(f'{api_key} is not None'):
+            assert api_key is not None
         headers = {
             "x-api-key": f"{api_key}"
         }
